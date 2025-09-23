@@ -21,9 +21,6 @@ import { AuthModule } from './auth/auth.module';
         password: config.get<string>('SUPABASE_PASSWORD'),
         database: config.get<string>('SUPABASE_DATABASE'),
         ssl: { rejectUnauthorized: false },
-        extra: {
-          options: '--inet=ipv4',
-        },
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true, // cuidado: só em dev
       }),
