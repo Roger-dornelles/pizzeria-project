@@ -23,7 +23,10 @@ import { AuthModule } from './auth/auth.module';
         password: process.env.SUPABASE_PASSWORD,
         database: process.env.SUPABASE_DATABASE,
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // só usar true em desenvolvimento
+        extra: {
+          family: 4, // força conexão IPv4
+        },
+        synchronize: false, // só usar true em desenvolvimento
       }),
       inject: [ConfigService],
     }),
