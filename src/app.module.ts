@@ -22,7 +22,7 @@ import { AuthModule } from './auth/auth.module';
         database: config.get<string>('SUPABASE_DATABASE'),
         ssl: { rejectUnauthorized: false },
         extra: {
-          family: 4, // 👈 força conexão IPv4
+          options: '--inet=ipv4',
         },
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true, // cuidado: só em dev
