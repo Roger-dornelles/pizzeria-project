@@ -1,9 +1,17 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  ArrayMaxSize,
+  ArrayMinSize,
+  ArrayNotEmpty,
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
 export class ProductDto {
-  @IsNumber()
+  @IsString()
   @IsNotEmpty({ message: 'Usuario não encontrado.' })
-  userId: number;
+  userId: string;
 
   @IsString({ message: 'Nome do produto deve conter somente caracteres.' })
   @IsNotEmpty({ message: 'Nome do produto é Obrigatorio.' })
@@ -15,7 +23,7 @@ export class ProductDto {
   @IsNotEmpty({ message: 'Produto deve conter uma Descrição.' })
   descriptionProduct: string;
 
-  @IsNumber({}, { message: 'Valor do produto deve conter somente numeros' })
+  @IsString({ message: 'Valor do produto deve conter somente numeros' })
   @IsNotEmpty({ message: 'Valor obrigatorio' })
   valueProduct: string;
 }
