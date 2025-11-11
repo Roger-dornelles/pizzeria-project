@@ -55,7 +55,7 @@ export class UsersService {
 
     const userDeleted = this.userRepository.delete(user.id);
 
-    if (!userDeleted) {
+    if (!userDeleted || !(await userDeleted).affected) {
       throw new NotFoundException('Ocorreu um erro, tente mais tarde.');
     }
 
