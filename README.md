@@ -16,3 +16,4 @@
 - Class-Validator
 - Postgress
 - Jwt
+- Jest (testes)
