@@ -16,19 +16,6 @@ import { UploadService } from './upload.service';
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
-  // @Post()
-  // @UseInterceptors(FileInterceptor('file', multerConfig))
-  // async uploadFile(@UploadedFile() file: Express.Multer.File) {
-  //   if (!file) {
-  //     throw new BadRequestException('Imagem não enviada');
-  //   }
-  //   const uploaded = await this.uploadService.uploadImage(file, 'public');
-  //   return {
-  //     message: 'Upload realizado com sucesso!',
-  //     file: uploaded,
-  //   };
-  // }
-
   @Post('multiple')
   @UseInterceptors(FilesInterceptor('files', 10, multerConfig))
   async uploadMultiple(@UploadedFiles() files: Express.Multer.File[]) {
