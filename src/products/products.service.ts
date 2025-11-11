@@ -8,25 +8,27 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { ProductDto } from './dto/product.dto';
+import { UploadService } from 'src/upload/upload.service';
 
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
+    private readonly uploadService: UploadService,
   ) {}
 
   async createProducts(
     createProductDto: ProductDto,
-    userID: number,
-  ): Promise<Product> {
-    if (!userID || userID !== createProductDto.userId) {
+    files: Express.Multer.File[],
+  ) {
+    if (!createProductDto.userId) {
       throw new UnauthorizedException(
         'Usuario sem permissão para adicionar um produto',
       );
     }
 
-    const productSaveBD = await this.productRepository.find({
+    const productSaveBD = await this.productRepository.findOne({
       where: { nameProduct: createProductDto.nameProduct },
     });
 
@@ -43,9 +45,20 @@ export class ProductsService {
       throw new NotFoundException('Ocorreu um erro no valor do produto');
     }
     createProductDto.valueProduct = formattedValue;
-    const product = this.productRepository.create(createProductDto);
 
-    return await this.productRepository.save(product);
+    const imagesUrl = await this.uploadService.uploadImage(files);
+    const file = imagesUrl.map((i) => ({
+      name: i.name,
+      path: i.path,
+      url: i.url,
+    }));
+
+    const products = await this.productRepository.create({
+      ...createProductDto,
+      userId: parseInt(createProductDto.userId),
+      files: file,
+    });
+    return await this.productRepository.save(products);
   }
 
   async updateOneProductFromId(

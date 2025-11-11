@@ -9,22 +9,31 @@ import {
   ParseIntPipe,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductDto } from './dto/product.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UpdateProductDto } from './dto/update-product.dto';
 
+import { FilesInterceptor } from '@nestjs/platform-express';
+
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Post()
-  create(@Body() createProductDto: ProductDto, @Req() req) {
-    const userID = req.user.userId;
+  @Post('create')
+  @UseInterceptors(FilesInterceptor('files'))
+  create(
+    @Body() createProductDto: ProductDto,
+    @UploadedFiles() files: Express.Multer.File[],
+    @Req() req,
+  ) {
+    const userID: number = req.user.id;
 
-    return this.productsService.createProducts(createProductDto, userID);
+    return this.productsService.createProducts(createProductDto, files);
   }
 
   @UseGuards(JwtAuthGuard)
