@@ -1,5 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UploadService } from './upload.service';
+import {
+  uploadFileToSupabase,
+  deleteFileFromSupabase,
+} from 'src/storage/storage.client';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 describe('UploadService', () => {
   let service: UploadService;
