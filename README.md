@@ -1,7 +1,15 @@
 #  Projeto Api pizzaria
 
 - Criação do projeto de api para pizzaria somente para estudos sobre o Nest.Js
+## Rotas
+- Usuario
+-- Criar usuario, excluir usuario e atualizar dados do usuario
 
+- Produto
+-- Adicionar um produto, atualizar o produto e excluir o produto
+
+- Autenticação
+-- Ao efetuar login consede autorização ao usuario para ter acesso para criar, atualizar ou excluir um produto
 
 ## Tecnologias usadas
 
