@@ -3,7 +3,7 @@
 
 ## EM DESENVOLVIMENTO
 
-- Criação do projeto de uma pizzaria para estudos sobre o Nest.Js
+- Criação do projeto de api para pizzaria somente para estudos sobre o Nest.Js
 
 
 ## Tecnologias usadas
