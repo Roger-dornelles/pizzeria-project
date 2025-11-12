@@ -1,7 +1,4 @@
-#  Projeto pizzaria
-
-
-## EM DESENVOLVIMENTO
+#  Projeto Api pizzaria
 
 - Criação do projeto de api para pizzaria somente para estudos sobre o Nest.Js
 
