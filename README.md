@@ -36,3 +36,9 @@ Apos fazer a instalação das dependencias do projeto pode rodar o projeto local
 ```bash
   npm run start:dev
 ```
+
+Para rodar os testes usar o comando 
+
+```bash
+  npm run test
+```
